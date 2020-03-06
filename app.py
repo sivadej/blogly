@@ -33,8 +33,18 @@ def create_user():
     new_user = User(
         first_name = request.form['first_name'],
         last_name = request.form['last_name'],
-        img_url = request.form['img_url']
+        img_url = request.form['img_url'],
     )
     db.session.add(new_user)
     db.session.commit()
     return redirect(url_for('show_users'))
+
+@app.route('/users/<int:id>')
+def show_user_details(id):
+    user = User.query.get_or_404(id)
+    return render_template('user_details.html', user=user)
+
+@app.route('/users/<int:id>/edit', methods=['POST'])
+def show_edit_form(id):
+    user = User.query.get_or_404(id)
+    return render_template('edit_user.html', user=user)
