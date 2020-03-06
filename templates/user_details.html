@@ -3,4 +3,6 @@
 {% block body %}
     <h1>{{user.first_name}} {{user.last_name}}</h1>
     <h2>{{user.img_url}}</h2>
+    <p><a href="/users/{{user.id}}/edit">Edit user</a><p>
+    <p><a href="/users">Back to users list</a></p>
 {% endblock %}

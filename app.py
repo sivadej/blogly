@@ -37,14 +37,31 @@ def create_user():
     )
     db.session.add(new_user)
     db.session.commit()
-    return redirect(url_for('show_users'))
+    return redirect(f'/users/{new_user.id}')
 
 @app.route('/users/<int:id>')
 def show_user_details(id):
     user = User.query.get_or_404(id)
     return render_template('user_details.html', user=user)
 
-@app.route('/users/<int:id>/edit', methods=['POST'])
+@app.route('/users/<int:id>/edit')
 def show_edit_form(id):
     user = User.query.get_or_404(id)
     return render_template('edit_user.html', user=user)
+
+@app.route('/users/<int:id>/edit', methods=['POST'])
+def do_edit(id):
+    user = User.query.get_or_404(id)
+    user.first_name = request.form['first_name']
+    user.last_name = request.form['last_name']
+    user.img_url = request.form['img_url']
+    db.session.commit()
+    return redirect(f'/users/{user.id}')
+
+@app.route('/users/<int:id>/delete', methods=['POST'])
+def remove_user(id):
+    print('deleting user')
+    user_to_delete = User.query.get_or_404(id)
+    db.session.delete(user_to_delete)
+    db.session.commit()
+    return redirect(url_for('show_users'))

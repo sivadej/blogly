@@ -5,7 +5,9 @@
         <input type="text" name="first_name" value="{{user.first_name}}">
         <input type="text" name="last_name" value="{{user.last_name}}">
         <input type="text" name="img_url" value="{{user.img_url}}">
-        <button>edit</button>
-        <button>cancel</button>
+        <button type="submit">edit</button>
+        <button formaction="/users/{{user.id}}/delete">REMOVE</button>
     </form>
+    <p><a href="/users/{{user.id}}">Cancel</a><p>
+
 {% endblock %}
