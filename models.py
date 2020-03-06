@@ -9,9 +9,9 @@ def connect_db(app):
 
 
 # Models/schema
-class Pet(db.Model):
-    __tablename__ = 'pets'
+class User(db.Model):
+    __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    name = db.Column(db.String(50), nullable=False, unique=True)
-    species = db.Column(db.String(30), nullable=True)
-    hunger = db.Column(db.Integer, nullable=False, default=20)
+    first_name = db.Column(db.String(30), nullable=False)
+    last_name = db.Column(db.String(30), nullable=False)
+    img_url = db.Column(db.String(50), nullable=True)
