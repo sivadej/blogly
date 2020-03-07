@@ -2,7 +2,17 @@
 {% block title %}Edit: {{user.get_full_name()}}{% endblock %}
 {% block body %}
     <h1>{{user.get_full_name()}}</h1>
-    <h2>{{user.img_url}}</h2>
+    <p>make img tag for {{user.img_url}}<p>
     <p><a href="/users/{{user.id}}/edit">Edit user</a><p>
+    <h2>Posts</h2>
+    <ul>
+    {% for post in posts %}
+        <li><a href="/posts/{{post.id}}">{{post.title}}</a></li>
+    {% endfor %}
+    </ul>
+    <p><a href="/users/{{user.id}}/posts/new">New Post</p>
     <p><a href="/users">Back to users list</a></p>
+
+    
+
 {% endblock %}
